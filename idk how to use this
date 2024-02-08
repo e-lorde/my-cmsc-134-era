@@ -1,0 +1,34 @@
+import random
+
+start = str(input("Hi! Welcome to whitejack. It's like blackjack but not. Same game, no cards kinda thing. Type 'START' to play. "))
+
+if start != "START":
+  print("I'm case sensitive. Please follow my instructions. Lets try again, shall we? ")
+else:
+  print("Let's Start! ")
+  hand = random.randrange(1,21)
+  print("Your number is ", hand)
+
+next = str(input("Press 'S' to Stand or 'H' to Hit. "))
+if next == "S":
+  hand1 = random.randrange(1,21)
+  if hand1 >= hand:
+    print("Your opponent's number is {}. You lose." .format(hand1))
+  else:
+    print("Your opponent's number is {}. You win." .format(hand1))
+if next == "H":
+  hand1 = random.randrange(1,21)
+  print("Your opponent's number is", hand1) 
+  hand2 = random.randrange(1,21)
+  sum = hand + hand2
+  print("Your new number is {}. In total you have {}." .format(hand2,sum))
+  if 0 < sum <= 21:
+    print("You win!")
+  else:
+    hand3 = random.randrange(1,21)
+    sum1 = hand1 + hand3
+    print("Your oppenent's new number is {}. In total they have {}." .format(hand3,sum1))
+    if 0 < sum1 <= 21:
+      print("Your opponent wins! Better luck next time :)")
+    else:
+      print("You both lose lol")
