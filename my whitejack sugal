@@ -32,3 +32,5 @@ if next == "H":
       print("Your opponent wins! Better luck next time :)")
     else:
       print("You both lose lol")
+if next != ("H", "S"):
+  print("I'm case sensitive. Please follow my instructions. Lets try again, shall we? ")
