@@ -16,6 +16,8 @@ if next == "S":
     print("Your opponent's number is {}. You lose." .format(hand1))
   else:
     print("Your opponent's number is {}. You win." .format(hand1))
+  if hand == hand1:
+    next = str(input("Ooh a Tie. Let's Break it off. Press 'H' to Hit. "))
 if next == "H":
   hand2 = random.randrange(1,21)
   sum = hand + hand2
