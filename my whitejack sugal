@@ -17,12 +17,12 @@ if next == "S":
   else:
     print("Your opponent's number is {}. You win." .format(hand1))
 if next == "H":
-  hand1 = random.randrange(1,21)
-  print("Your opponent's number is", hand1) 
   hand2 = random.randrange(1,21)
   sum = hand + hand2
   print("Your new number is {}. In total you have {}." .format(hand2,sum))
-  if 0 < sum <= 21:
+  hand1 = random.randrange(1,21)
+  print("Your opponent's number is", hand1)  
+  if hand1 < sum <= 21:
     print("You win!")
   else:
     hand3 = random.randrange(1,21)
@@ -32,5 +32,3 @@ if next == "H":
       print("Your opponent wins! Better luck next time :)")
     else:
       print("You both lose lol")
-if next != ("H", "S"):
-  print("I'm case sensitive. Please follow my instructions. Lets try again, shall we? ")
