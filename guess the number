@@ -1,0 +1,12 @@
+import random
+oa = random.randrange(0,11)
+
+x = int(input("Are you feeling lucky today, bbgurl? 🤩🎲.\nCorrectly guess the number I have chosen (from 0 to 10) and I will give you some ✨cash incentives✨\nGuess! "))
+while x != oa:
+  if x < 0 or x > 10: 
+    x = int(input("OMG not following instructions, please choose numbers in the 0-10 range. my god🙄 "))
+    continue
+  x = int(input("Nope! Try again? "))
+
+if x == oa:
+  print(f"🎈CONGRATULATIONS, YOU WON!🎈 The lucky number is 🎲{oa}🎲. \nPlease claim your One Million Pesos (₱1,000,000) 😲 at Ms. Yvonn Kyla Magallon's office at the VSU DCST building.")
