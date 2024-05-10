@@ -1,0 +1,43 @@
+import random
+
+outside = ["CABBAGE", "WOLF", "SHEEP"]
+inside = []
+move1 = random.randrange(0, 10)
+print("You are a Shepherd trying to cross the river with a boat. With you are cabbages, your sheeps, and a wolf to help herd the sheeps."
+      "\nHowever, you can only bring one set of items with you on the boat. How will you cross the river? Be wary. \n")
+
+while len(outside) > 0: 
+    first = input(f"What will you carry across? {outside} (Type 'NONE' if none.) ").upper()
+
+    if first == "NONE":
+        print("You decided not to carry anything across.")
+        continue
+
+    if move1 % 2 == 0 or move1 % 2 == 1:
+        outside.remove(first)
+        inside.append(first)
+        print(f"\nYou successfully brought your {first} across the river."
+              f"\nOn the other side of the river you have {outside}. Across the river you have {inside} \n ")
+
+        if "SHEEP" in outside and "CABBAGE" in outside:
+            print("Your sheep ate your cabbages. You starve and could not feed your family. You lose")
+            break
+        if "WOLF" in outside and "SHEEP" in outside:
+            print("Your wolf ate your sheeps. The wolf spared none. You lose everything.")
+            break
+
+    if len(outside) == 0:
+        print("Congratulations! You successfully brought all items across the river. You win!")
+        break
+
+    second = input(f"What will you carry back? {inside} (Type 'NONE' if none.) ").upper()
+
+    if second == "NONE":
+        print("You decided not to carry anything back.")
+        continue
+
+    if move1 % 2 == 0 or move1 % 2 == 1:
+        inside.remove(second)
+        outside.append(second)
+        print(f"\You successfully brought back your {second}."
+              f"\On the other side of the river you have {outside}. Across the river you have {inside} \n ")
