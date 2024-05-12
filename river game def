@@ -1,69 +1,82 @@
 import random
 
 def intro():
-    print("You are a Shepherd trying to cross the river with a boat. With you are cabbages, your sheep, and a wolf to help herd the sheep."
+    print("You are a Shepherd trying to cross the river with a boat. With you are cabbages, your sheep, and a wolf to protect you."
           "\nHowever, you can only bring one set of items with you on the boat. How will you cross the river? Be wary. \n")
 
 def items_across():
     global first, outside, inside
-    first = input(f"What will you carry across? {outside} (Type 'NONE' if none.) ").upper()
+    while True:
+        first = input(f"What will you carry across? {outside} (Type 'NONE' if none.) ").upper()
+        if first == "NONE" or first in outside:
+            break
+        else:
+            print("Please enter a valid item from the list or 'NONE' if none.")
+
     if first == "NONE":
-        print("You decided not to carry anything across.")
+        print("You decided not to carry anything across.\n")
         return
-    print(f"\nYou successfully brought your {first} across the river."
-          f"\nOn the other side of the river you have {outside}. Across the river you have {inside} \n ")
-    outside_conditions()
+
 
 def items_back():
     global second, outside, inside
-    second = input(f"What will you carry back? {inside} (Type 'NONE' if none.) ").upper()
+    while True:
+        second = input(f"What will you carry back? {inside} (Type 'NONE' if none.) ").upper()
+        if second == "NONE" or second in inside:
+            break
+        else:
+            print("Please enter a valid item from the list or 'NONE' if none.")
+
     if second == "NONE":
-        print("You decided not to carry anything back.")
+        print("You decided not to carry anything back.\n")
         return
-    print(f"\nYou successfully brought back your {second}."
-          f"\nOn the other side of the river you have {outside}. Across the river you have {inside} \n ")
-    inside_conditions()
+    
 
 def outside_conditions():
     global outside, first
-    move = random.randint(0, 10)
     if first in outside:
         outside.remove(first)
         inside.append(first)
     if "SHEEP" in outside and "CABBAGE" in outside:
-        print("Your sheep ate your cabbages. You starve and could not feed your family. You lose")
+        print("Your sheep ate your cabbages. You're entire family suffers from this. Hunger kills them all.\n")
         return True
     if "WOLF" in outside and "SHEEP" in outside:
-        print("Your wolf ate your sheep. The wolf spared none. You lose everything.")
+        print("Your wolf ate your sheep. The river flows with red blood. The wolf spared none.\n")
         return True
+    print(f"\nYou successfully brought your {first} across the river."
+          f"\nOn the other side of the river you have {outside}. Across the river you have {inside} \n ")
     if len(outside) == 0:
-        print("Congratulations! You successfully brought all items across the river. You win!")
+        print("Congratulations! You successfully crossed the river. Now go feed your family.\n")
         return True
     return False
 
 def inside_conditions():
     global inside, second
-    move = random.randint(0, 10)
     if second in inside:
         inside.remove(second)
         outside.append(second)
     if "SHEEP" in inside and "CABBAGE" in inside:
-        print("Your sheep ate your cabbages. You starve and could not feed your family. You lose")
+        print("Your sheep ate your cabbages. You're entire family suffers from this. Hunger kills them all.\n")
         return True
     if "WOLF" in inside and "SHEEP" in inside:
-        print("Your wolf ate your sheep. The wolf spared none. You lose everything.")
+        print("Your wolf ate your sheep. The river flows with red blood. The wolf spared none.\n")
         return True
+    print(f"\nYou successfully brought your {first} across the river."
+          f"\nOn the other side of the river you have {outside}. Across the river you have {inside} \n ")
     if len(outside) == 0:
-        print("Congratulations! You successfully brought all items across the river. You win!")
+        print("Congratulations! You successfully brought all items across the river. You win!\n")
         return True
     return False
 
 def play_whitejack():
-    print("\nIt seems like a witch stole your item."
-          "\nTo get it back, the witch challenged you to a numbers game.")
+    print("\nThe river fairies are FURIOUS at you for crossing the river."
+          "\nYou try to make peace. Beat them at a numbers game to be let go.\n")
 
     def get_hand():
-        return random.randrange(1, 21)
+        return random.randint(1, 21)
+    
+    def get_hand1():
+        return random.randint(1, 21)
 
     player_hand = get_hand()
     print("Your number is", player_hand)
@@ -71,22 +84,28 @@ def play_whitejack():
     while True:
         choice = input("Press 'H' to Hit or 'S' to Stand: ").upper()
         if choice == "H":
-            player_hand += random.randrange(1, 11)
+            player_hand += random.randint(1, 14)
             print("Your number is", player_hand)
             if player_hand > 21:
-                print("You busted! You lose everything.")
+                print("The fairies laugh at your stupid mistake. They destroyed everything.\n")
                 return False
+            break
         elif choice == "S":
             break
+        else:
+            print("Please enter a valid answer (H for Hit, S for Stand).")
 
-    opponent_hand = get_hand()
-    print("Opponent's number is", opponent_hand)
+    opponent_hand = get_hand1()
+    print("The fairies' number is", opponent_hand)
     if opponent_hand > player_hand and opponent_hand <= 21:
-        print("You lose! Better luck next time :(")
+        print("The water rose higher and higher, drowning you."
+              "\nThe fairies ought to teach you a lesson.\n")
         return False
     else:
-        print("You win this round!")
+        print("The fairies kept their promise.\n")
         return True
+
+
 
 def play_game():
     global outside, inside
@@ -102,6 +121,8 @@ def play_game():
         else:
             if not play_whitejack():
                 break
+        if len(outside) == 0:  
+            break
         items_back()
         if inside_conditions():
             break
@@ -111,14 +132,14 @@ def play_game():
 
 def play_again():
     while True:
-        again = input("Do you want to play again? (yes/no): ").lower()
-        if again == "yes":
+        again = input("Do you wish to cross the river again? [YES/NO]: ").upper()
+        if again == "YES":
             play_game()
-        elif again == "no":
-            print("Thanks for playing!")
+        elif again == "NO":
+            print("We wish you good luck on your endeavors\n")
             break
         else:
-            print("Please enter 'yes' or 'no'.")
+            print("Please enter 'YES' or 'NO'.")
 
 play_game()
 play_again()
